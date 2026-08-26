@@ -16,11 +16,13 @@ class ProductListView(generics.ListCreateAPIView):
         user = self.request.user
         return Product.objects.filter(author = user)
 
+
+class ProductCreateView(generics.CreateAPIView):
+    serializer_class = ProductSerializer
+    permission_classes = [IsAuthenticated]
+
     def perform_create(self, serializer):
-        if serializer.is_valid():
-            serializer.save(author = self.request.user)
-        else:
-            print(serializer.errors)
+        serializer.save(author = self.request.user)
 
 class DashboardView(generics.ListAPIView):
     serializer_class = ProductSerializer
@@ -30,7 +32,7 @@ class DashboardView(generics.ListAPIView):
         user = self.request.user
         return Product.objects.filter(author = user)
 
-class ProductDelete(generics.DestroyAPIView):
+class ProductDeleteView(generics.DestroyAPIView):
     serializer_class = ProductSerializer
     permission_classes = [IsAuthenticated]
 
@@ -46,7 +48,7 @@ class ProductDetailView(generics.RetrieveAPIView):
         user = self.request.user
         return Product.objects.filter(author = user)
 
-class ProductEdit(generics.UpdateAPIView):
+class ProductEditView(generics.UpdateAPIView):
     serializer_class = ProductSerializer
     permission_classes = [IsAuthenticated]
 

@@ -15,5 +15,5 @@ class UserSerializer(serializers.ModelSerializer):
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = ["id", "name", "description", "price", "created_at", "user"]
-        extra_kwargs = {"user": {"read_only": True}}
+        fields = ["id", "name", "description", "price", "created_at", "author"]
+        extra_kwargs = {"author": {"read_only": True}}

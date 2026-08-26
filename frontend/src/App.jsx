@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 import Login from "./pages/Login"
 import Home from "./pages/Home"
 import Register from "./pages/Register"
+import CreateProduct from "./pages/CreateProduct"
 
 
 function Logout() {
@@ -26,6 +27,7 @@ function App() {
                 <Home />
             }
           />
+          <Route path = "/create-product" element={<CreateProduct />} />
           <Route path = "/login" element={<Login />} />
           <Route path = "/logout" element={<Logout />} />
           <Route path = "/register" element={<RegisterAndLogout />} />
