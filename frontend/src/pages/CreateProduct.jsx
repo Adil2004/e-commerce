@@ -8,17 +8,30 @@ function CreateProduct() {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
+    const [image, setImage] = useState(null);
 
     useEffect(() => {
         setUsername(localStorage.getItem("username"));
     }, [])
 
+    const handleFileChange = (e) => {
+        setImage(e.target.files[0])
+    }
     const createProduct = (e) => {
         e.preventDefault();
-        api.post("/api/products/create/", { 
-            name: name,
-            description: description,
-            price: price
+
+        const formData = new FormData();
+        formData.append("name", name);
+        formData.append("description", description);
+        formData.append("price", price);
+        if (image) {
+            formData.append("images", image);
+        }
+
+        api.post("api/products/create/", formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
         }).then((res) => {
             if (res.status === 201) {
                 alert("Product created successfully!");
@@ -32,8 +45,8 @@ function CreateProduct() {
     return (
         <div>
             <ul className="navbar">
+                <li><a href="/">Home</a></li>
                 <li><a href="/dashboard">Dashboard</a></li>
-                <li><a href="/products">Products</a></li>
                 <li><a href="/create-product">Create Product</a></li>
                 <li className="navbar-logout-li">
                     <a href="/logout/">Logout</a>
@@ -76,6 +89,8 @@ function CreateProduct() {
                     onChange={(e) => setPrice(e.target.value)}
                     value={price}
                 />
+                <br/>
+                <input type="file" accept="image/*" onChange={handleFileChange} />
                 <br/>
                 <button type="submit">Create Product</button>
             </form>

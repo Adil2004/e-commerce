@@ -34,6 +34,9 @@ function ProductDetail() {
                         <p>Posted on: {new Date(product.created_at).toLocaleDateString()}</p>
                         <p>Price: ${product.price}</p>
                         <p>Created by: {product.author}</p>
+                        {product.images && (
+                            <img src={product.images} alt={product.name} style = {{ maxWidth: "300px"}}/>
+                        )}
                     </div>
                 )}
             </div>
