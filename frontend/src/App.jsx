@@ -4,6 +4,8 @@ import Home from "./pages/Home"
 import Register from "./pages/Register"
 import CreateProduct from "./pages/CreateProduct"
 import Dashboard from "./pages/Dashboard"
+import ProductDetail from "./pages/ProductDetail"
+
 
 function Logout() {
   localStorage.clear();
@@ -27,6 +29,7 @@ function App() {
                 <Home />
             }
           />
+          <Route path = "/products/:id" element={<ProductDetail />} />
           <Route path = "/create-product" element={<CreateProduct />} />
           <Route path = "/dashboard" element={<Dashboard />} />
           <Route path = "/login" element={<Login />} />
