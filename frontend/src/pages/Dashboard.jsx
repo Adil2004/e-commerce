@@ -45,17 +45,15 @@ function Dashboard() {
             <ul className="navbar">
                 <li><a href="/">Home</a></li>
                 <li><a href="/dashboard">Dashboard</a></li>
-                <li><a href="/create-product">Create Product</a></li>
                 <li><a href="/products/my">My Products</a></li>
+                <li><a href="/create-product">Create Product</a></li>
                 <li className="navbar-logout-li">
                     <a href="/logout/">Logout</a>
                 </li>
             </ul>
 
-            <h1>Dashboard</h1>
-            <h2>Welcome, {username}!</h2>
-            <h2>This is the dashboard for online market web page.</h2>
-            <h2>Here you can see all your products.</h2>
+            <h5>Dashboard</h5>
+            <h5>Welcome, {username}!</h5>
 
             <div className="dashboard-container">
                 {products.map((product) => (

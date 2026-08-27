@@ -47,6 +47,7 @@ function CreateProduct() {
             <ul className="navbar">
                 <li><a href="/">Home</a></li>
                 <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/products/my">My Products</a></li>
                 <li><a href="/create-product">Create Product</a></li>
                 <li className="navbar-logout-li">
                     <a href="/logout/">Logout</a>
@@ -54,7 +55,6 @@ function CreateProduct() {
             </ul>
 
             <h1>Create Product</h1>
-            <h2>Welcome, {username}!</h2>
 
             <form onSubmit={createProduct}>
                 <label htmlFor="name">Product Name:</label>

@@ -5,12 +5,12 @@ function ProductPreview({product, onDetail}) {
 
     return (
         <div className="product-container" onClick={() => onDetail(product.id)}>
-            <p className="product-name">{product.name}</p>
-            <p className="product-price">Price: ${Number(product.price).toFixed(2)}</p>
-            <p className="product-date">Posted on: {formattedDate}</p>
             {product.images && (
                             <img src={product.images} alt={product.name} style = {{ maxWidth: "75px"}}/>
             )}
+            <p className="product-name">{product.name}</p>
+            <p className="product-price">Price: ${Number(product.price).toFixed(2)}</p>
+            <p className="product-date">Posted on: {formattedDate}</p>
         </div>
     );
 }
