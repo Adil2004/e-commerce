@@ -3,7 +3,8 @@ import ProductPreview from "../components/ProductPreview";
 import api from "../api";
 import { useNavigate } from "react-router-dom";
 
-function Dashboard() {
+
+function MyProducts() {
     const [username, setUsername] = useState("");
     const [products, setProducts] = useState([]);
     const navigate = useNavigate();
@@ -22,7 +23,7 @@ function Dashboard() {
     }, [page]);
 
     const fetchProducts = (pageNum) => {
-        api.get(`/api/products/?page=${pageNum}`)
+        api.get(`/api/products/my/?page=${pageNum}`)
         .then((res) => {
             setProducts(res.data.results);
             setCount(res.data.count);
@@ -54,8 +55,7 @@ function Dashboard() {
 
             <h1>Dashboard</h1>
             <h2>Welcome, {username}!</h2>
-            <h2>This is the dashboard for online market web page.</h2>
-            <h2>Here you can see all your products.</h2>
+            <h2>This is the page, where you can see all your products.</h2>
 
             <div className="dashboard-container">
                 {products.map((product) => (
@@ -87,4 +87,4 @@ function Dashboard() {
     )
 }
 
-export default Dashboard;
+export default MyProducts;

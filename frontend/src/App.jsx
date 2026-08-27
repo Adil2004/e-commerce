@@ -5,7 +5,7 @@ import Register from "./pages/Register"
 import CreateProduct from "./pages/CreateProduct"
 import Dashboard from "./pages/Dashboard"
 import ProductDetail from "./pages/ProductDetail"
-
+import MyProducts from "./pages/MyProducts"
 
 function Logout() {
   localStorage.clear();
@@ -35,6 +35,7 @@ function App() {
           <Route path = "/login" element={<Login />} />
           <Route path = "/logout" element={<Logout />} />
           <Route path = "/register" element={<RegisterAndLogout />} />
+          <Route path = "/products/my" element = {<MyProducts />} />
         </Routes>
       </BrowserRouter>
     </>
