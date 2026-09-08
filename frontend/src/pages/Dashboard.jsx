@@ -47,6 +47,8 @@ function Dashboard() {
                 <li><a href="/dashboard">Dashboard</a></li>
                 <li><a href="/products/my">My Products</a></li>
                 <li><a href="/create-product">Create Product</a></li>
+                <li><a href="/ai-assistant">AI Assistant</a></li>
+                <li><a href="/shopping-cart">Shopping Cart</a></li>
                 <li className="navbar-logout-li">
                     <a href="/logout/">Logout</a>
                 </li>

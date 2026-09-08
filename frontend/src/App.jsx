@@ -6,6 +6,8 @@ import CreateProduct from "./pages/CreateProduct"
 import Dashboard from "./pages/Dashboard"
 import ProductDetail from "./pages/ProductDetail"
 import MyProducts from "./pages/MyProducts"
+import AIAssistant from "./components/AIAssistant";
+import ShoppingCart from "./pages/ShoppingCart";
 
 function Logout() {
   localStorage.clear();
@@ -29,6 +31,7 @@ function App() {
                 <Home />
             }
           />
+          <Route path = "/ai-assistant" element={<AIAssistant/>} />
           <Route path = "/products/:id" element={<ProductDetail />} />
           <Route path = "/create-product" element={<CreateProduct />} />
           <Route path = "/dashboard" element={<Dashboard />} />
@@ -36,6 +39,7 @@ function App() {
           <Route path = "/logout" element={<Logout />} />
           <Route path = "/register" element={<RegisterAndLogout />} />
           <Route path = "/products/my" element = {<MyProducts />} />
+          <Route path = "/shopping-cart" element = {<ShoppingCart />} />
         </Routes>
       </BrowserRouter>
     </>

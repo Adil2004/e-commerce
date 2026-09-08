@@ -47,7 +47,7 @@ function ProductDetail() {
         setEditName(product.name);
         setEditDescription(product.description);
         setEditPrice(product.price);
-        setEditImage(null); // don't prefill file input; leave blank unless user picks a new one
+        setEditImage(null);
         setIsEditing(true);
     }
 
@@ -84,12 +84,26 @@ function ProductDetail() {
         }
     };
 
+    const addToCart = async (productId) => {
+        try {
+            const res = await api.post("/api/shopping-cart/", { product: productId})
+            alert("Product added to cart!");
+        }
+        catch (error) {
+            console.error(error);
+            alert("Failed to add product to cart");
+        }
+    }
+
     return (
         <div>
             <div className="navbar">
                 <li><a href="/">Home</a></li>
                 <li><a href="/dashboard/">Dashboard</a></li>
+                <li><a href="/products/my">My Products</a></li>
                 <li><a href="/create-product">Create Product</a></li>
+                <li><a href="/ai-assistant">AI Assistant</a></li>
+                <li><a href="/shopping-cart">Shopping Cart</a></li>
                 <li className ="navbar-logout-li">
                     <a href = "/logout/">Logout</a>
                 </li>
@@ -113,6 +127,9 @@ function ProductDetail() {
                                 <button onClick={deleteProduct}>Delete</button>
                             </div>
                         )}
+                        <button onClick={() => addToCart(product.id)}>
+                            Add to Cart
+                        </button>
                     </div>
                 )}
 
