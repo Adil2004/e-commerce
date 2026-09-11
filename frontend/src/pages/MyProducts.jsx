@@ -8,14 +8,22 @@ function MyProducts() {
     const [username, setUsername] = useState("");
     const [products, setProducts] = useState([]);
     const [product, setProduct] = useState(null);
+    const [search, setSearch] = useState("");
 
     const navigate = useNavigate();
     const [page, setPage] = useState(1);
     const [count, setCount] = useState(0);
 
 
-    const PAGE_SIZE = 5;
+    const PAGE_SIZE = 6;
     const totalPages = Math.ceil(count / PAGE_SIZE);
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+
+        setPage(1);
+        fetchProducts(1, search);
+    };
 
     useEffect(() => {
         setUsername(localStorage.getItem("username"));
@@ -46,21 +54,31 @@ function MyProducts() {
 
     return (
         <div>
-            <ul className="navbar">
+            <ul className ="navbar">
                 <li><a href="/">Home</a></li>
-                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/dashboard/">All Products</a></li>
                 <li><a href="/products/my">My Products</a></li>
-                <li><a href="/create-product">Create Product</a></li>
+                <li><a href="/create-product/">Create Product</a></li>
                 <li><a href="/ai-assistant">AI Assistant</a></li>
                 <li><a href="/shopping-cart">Shopping Cart</a></li>
-                <li className="navbar-logout-li">
+                <li className = "navbar-logout-li">
                     <a href="/logout/">Logout</a>
                 </li>
-            </ul>
+            </ul>   
 
-            <h1>Dashboard</h1>
-            <h2>Welcome, {username}!</h2>
-            <h2>This is the page, where you can see all your products.</h2>
+            <h1>My Products</h1>
+
+            <form className="search-form" onSubmit={handleSearch}>
+                <input
+                    type="text"
+                    placeholder="Search products..."
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                />
+                <button type="submit">
+                    Search
+                </button>
+            </form>
 
             <div className="dashboard-container">
                 {products.map((product) => (

@@ -46,7 +46,7 @@ function CreateProduct() {
         <div>
             <ul className="navbar">
                 <li><a href="/">Home</a></li>
-                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/dashboard">All Products</a></li>
                 <li><a href="/products/my">My Products</a></li>
                 <li><a href="/create-product">Create Product</a></li>
                 <li><a href="/ai-assistant">AI Assistant</a></li>
@@ -91,6 +91,8 @@ function CreateProduct() {
                     onChange={(e) => setPrice(e.target.value)}
                     value={price}
                 />
+                <br/>
+                <label htmlFor="image">Product Image:</label>
                 <br/>
                 <input type="file" accept="image/*" onChange={handleFileChange} />
                 <br/>

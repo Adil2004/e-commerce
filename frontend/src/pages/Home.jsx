@@ -12,7 +12,7 @@ function Home() {
         <div>
             <ul className ="navbar">
                 <li><a href="/">Home</a></li>
-                <li><a href="/dashboard/">Dashboard</a></li>
+                <li><a href="/dashboard/">All Products</a></li>
                 <li><a href="/products/my">My Products</a></li>
                 <li><a href="/create-product/">Create Product</a></li>
                 <li><a href="/ai-assistant">AI Assistant</a></li>
@@ -22,12 +22,11 @@ function Home() {
                 </li>
             </ul>   
 
-            <h1>E-commerce</h1>
-            <h2>Welcome, {username} !</h2>
+            <h1>Home page</h1>
+            <h2>Welcome!</h2>
             <h3>This is test application</h3>
-            <h4>You can create, edit, and delete products.</h4>
-            <h4>All products will be saved in the database.</h4>
-            <h4>The products can be seen in the dashboard.</h4>
+            <h3>You can create, edit, and delete, add to the shopping cart products.</h3>
+            <h3>All products will be saved in the database.</h3>
         </div>
     );
 }

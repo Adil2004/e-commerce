@@ -48,11 +48,51 @@ function ShoppingCart() {
         0
     );
 
+    const addQuantity = async (cartItemId, newQuantity) => {
+        try {
+            await api.put(`/api/shopping-cart/${cartItemId}/`, {
+                quantity: newQuantity,
+            });
+
+            setCartItems((currentItems) =>
+                currentItems.map((item) =>
+                    item.id === cartItemId
+                        ? { ...item, quantity: newQuantity }
+                        : item
+                )
+            );
+
+        } catch (error) {
+            console.error("Error updating quantity:", error);
+        }
+    };
+
+    const removeQuantity = async (cartItemId, newQuantity) => {
+        if (newQuantity < 1) {
+            removeFromCart(cartItemId);
+            return;
+        }
+
+        try {
+            await api.put(`/api/shopping-cart/${cartItemId}/`, {
+                quantity: newQuantity,
+            });
+            setCartItems((currentItems) =>
+                currentItems.map((item) => 
+                item.id === cartItemId
+                    ? { ...item, quantity: newQuantity}
+                : item )
+            );
+        } catch (error) {
+            console.error("Error updating quantity:", error);
+        }
+    }
+
     return (
         <div>
             <ul className="navbar">
                 <li><a href="/">Home</a></li>
-                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/dashboard">All Products</a></li>
                 <li><a href="/products/my">My Products</a></li>
                 <li><a href="/create-product">Create Product</a></li>
                 <li><a href="/ai-assistant">AI Assistant</a></li>
@@ -64,14 +104,9 @@ function ShoppingCart() {
 
             <h1>Shopping Cart</h1>
 
-            <h2>
-                This is the page where you can see all your products
-                that you added to the cart.
-            </h2>
-
             <div className="dashboard-container">
                 {cartItems.length === 0 ? (
-                    <h2>Shopping cart is empty</h2>
+                    <h3>Shopping cart is empty.</h3>
                 ) : (
                     <>
                         <div className="dashboard-container">
@@ -82,16 +117,27 @@ function ShoppingCart() {
                                         onDetail={detailProduct}
                                     />
 
-                                    <button onClick={() => removeFromCart(item.id)}>
-                                        Remove from Cart
-                                    </button>
+                                    <div className = "cart-quantity-controls">
+                                        <button onClick={() => removeQuantity(item.id, item.quantity - 1)}>
+                                            -
+                                        </button>
+
+                                        <span>Quantity: {item.quantity}</span>
+                                        <button onClick={() => addQuantity(item.id, item.quantity + 1)}>
+                                            +
+                                        </button>
+
+
+                                        <button onClick={() => removeFromCart(item.id)}>
+                                            🗑️
+                                        </button>                                    
+                                    </div>
                                 </div>
                             ))}
                         </div>
-
-                        <h3>
-                            Total Price: ${totalPrice.toFixed(2)}
-                        </h3>
+                        <div className = "cart-total-price">
+                            <h3>Total Price: ${totalPrice.toFixed(2)}</h3>
+                        </div>
                     </>
                 )}
             </div>

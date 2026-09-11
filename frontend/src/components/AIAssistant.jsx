@@ -55,23 +55,23 @@ function AIAssistant() {
         <div>
             <ul className="navbar">
                 <li><a href="/">Home</a></li>
-                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/dashboard">All Products</a></li>
                 <li><a href="/products/my">My Products</a></li>
                 <li><a href="/create-product">Create Product</a></li>
                 <li><a href="/ai-assistant">AI Assistant</a></li>
+                <li ><a href="/shopping-cart">Shopping Cart</a></li>
                 <li className="navbar-logout-li">
                     <a href="/logout/">Logout</a>
                 </li>
             </ul>
 
-            <h5>AI Product Assistant</h5>
-            <h5>Welcome, {username}!</h5>
+            <h1>AI Product Assistant</h1>
 
             <div className="chat-container">
                 <div className="chat-messages">
                     {messages.map((msg, i) => (
                         <div key={i} className={`chat-bubble ${msg.role}`}>
-                            <p>{msg.text}</p>
+                            <h3>{msg.text}</h3>
                             {msg.products.length > 0 && (
                                 <div className="chat-product-results">
                                     {msg.products.map((product) => (

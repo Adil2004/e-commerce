@@ -15,6 +15,7 @@ from .serializers import UserSerializer
 from rest_framework.decorators import APIView, api_view, permission_classes
 from rest_framework.response import Response
 from django.conf import settings
+from rest_framework.filters import SearchFilter
 import time
 
 # Create your views here.
@@ -23,6 +24,8 @@ class ProductListView(generics.ListCreateAPIView):
     serializer_class = ProductSerializer
     permission_classes = [IsAuthenticated]
     pagination_class = ProductPagination
+    filter_backends = [SearchFilter]
+    search_fields = ['name', 'description']
 
 class ProductCreateView(generics.CreateAPIView):
     serializer_class = ProductSerializer
@@ -37,6 +40,8 @@ class DashboardView(generics.ListAPIView):
     serializer_class = ProductSerializer
     permission_classes = [IsAuthenticated]
     pagination_class = ProductPagination
+    filter_backends = [SearchFilter]
+    search_fields = ['name', 'description']
 
 class ProductDeleteView(generics.DestroyAPIView):
     serializer_class = ProductSerializer
@@ -111,6 +116,39 @@ class CartView(APIView):
             status=status.HTTP_201_CREATED
         )
 
+    def put(self, request, cart_item_id):
+        try:
+            cart_item = CartItems.objects.get(
+                id=cart_item_id,
+                user=request.user
+            )
+        except CartItems.DoesNotExist:
+            return Response(
+                {"error": "Cart item not found"},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+        quantity = request.data.get("quantity")
+
+        if quantity is None:
+            return Response(
+                {"error": "Quantity is required"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        if int(quantity) < 1:
+            return Response(
+                {"error": "Quantity must be at least 1"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        cart_item.quantity = int(quantity)
+        cart_item.save()
+
+        serializer = CartItemSerializer(cart_item)
+
+        return Response(serializer.data)
+
     def delete(self, request, cart_item_id):
         try:
             cart_item = CartItems.objects.get(
@@ -126,38 +164,6 @@ class CartView(APIView):
         cart_item.delete()
 
         return Response(status=204)
-
-# class AddProductToCartView(APIView):
-#     permission_classes = [IsAuthenticated]
-
-#     def post(self, request):
-#         product_id = request.data.get("product_id")
-#         quantity = request.data.get("quantity", 1)
-
-#         try:
-#             product = Product.objects.get(id=product_id)
-#         except Product.DoesNotExist:
-#             return Response({"error": "Product not found."}, status=404)
-
-#         cart_item, created = CartItems.objects.get_or_create(
-#             user = request.user,
-#             product = product,
-#             defaults = {"quantity": quantity}
-#         )
-
-#         if not created:
-#             cart_item.quantity += int(quantity)
-#             cart_item.save()
-
-#         return Response(
-#             {"message": "Product added to cart successfully."}, 
-#             status=201
-#         )
-
-#     def get_queryset(self):
-#         user = self.request.user
-#         return CartItems.objects.filter(user = user).order_by("-added_at")
-
 
 class CreateUserView(generics.CreateAPIView):
     queryset = User.objects.all()

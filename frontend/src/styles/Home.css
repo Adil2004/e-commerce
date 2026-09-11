@@ -1,5 +1,6 @@
 body {
   background-color: #f2f2f2;
+  margin: 0;
 }
 
 div {
@@ -7,11 +8,12 @@ div {
 }
 
 .navbar {
-  text-align:center;
   display: flex;
-  background-color: #ffffe6; 
+  background-color: white; 
   overflow: hidden;
   list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
 .navbar li a {
@@ -23,7 +25,7 @@ div {
 }
 
 .navbar li a:hover {
-  background-color: #ffffb3;
+  background-color: white;
 }
 
 .navbar-logout-li {
@@ -73,4 +75,99 @@ form input[type="submit"] {
 
 form input[type="submit"]:hover {
   background-color: #0056b3;
+}
+
+.dashboard-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 54px;
+    row-gap: 40px;
+    margin: 40px 24px;
+}
+
+.product-preview {
+    width: 187px;
+}
+
+.product-preview img {
+    width: 187px;
+    height: 110px;
+    object-fit: cover;
+    border-radius: 3px;
+}
+
+.product-preview p {
+    margin: 6px 0 0;
+    font-size: 12px;
+}
+
+h1, h2, h3 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.product-cart-action {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.product-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 30px 0;
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 0;
+    background: none;
+    box-shadow: none;
+}
+
+.search-form input {
+    flex: 1;
+    padding: 10px;
+    margin: 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.search-form button {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+
+.search-form button:hover {
+    background-color: #0056b3;
+}
+
+.cart-quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.cart-total-price {
+  /* Tells the element to span from the first column line to the last column line */
+  grid-column: 1 / -1; 
+  
+  /* Adds a gap between the grid items above and your total price */
+  margin-top: 20px; 
 }

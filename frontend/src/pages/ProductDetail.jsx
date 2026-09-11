@@ -99,7 +99,7 @@ function ProductDetail() {
         <div>
             <div className="navbar">
                 <li><a href="/">Home</a></li>
-                <li><a href="/dashboard/">Dashboard</a></li>
+                <li><a href="/dashboard/">All Products</a></li>
                 <li><a href="/products/my">My Products</a></li>
                 <li><a href="/create-product">Create Product</a></li>
                 <li><a href="/ai-assistant">AI Assistant</a></li>
@@ -109,17 +109,18 @@ function ProductDetail() {
                 </li>
             </div>
 
+            <h1>Product Detail</h1>
             <div>
                 {product && !isEditing && (
                     <div>
-                        <h3>{product.name}</h3>
-                        <p>{product.description}</p>
-                        <p>Posted on: {new Date(product.created_at).toLocaleDateString()}</p>
-                        <p>Price: ${product.price}</p>
-                        <p>Created by: {product.author}</p>
+                        <h1>Product Name: {product.name}</h1>
                         {product.images && (
                             <img src={product.images} alt={product.name} style={{ maxWidth: "300px" }} />
                         )}
+                        <h2>Description: {product.description}</h2>
+                        <h2>Posted on: {new Date(product.created_at).toLocaleDateString()}</h2>
+                        <h2>Price: ${product.price}</h2>
+                        <h2>Created by: {product.author}</h2>
 
                         {isAuthor && (
                             <div className="product-actions">
@@ -127,9 +128,11 @@ function ProductDetail() {
                                 <button onClick={deleteProduct}>Delete</button>
                             </div>
                         )}
-                        <button onClick={() => addToCart(product.id)}>
-                            Add to Cart
-                        </button>
+                        <div className="product-cart-action">
+                            <button onClick={() => addToCart(product.id)}>
+                                Add to Cart
+                            </button>
+                        </div>
                     </div>
                 )}
 
@@ -176,9 +179,10 @@ function ProductDetail() {
                             onChange={handleEditImageChange}
                         />
                         <br />
-
-                        <button type="submit">Save Changes</button>
-                        <button type="button" onClick={cancelEditing}>Cancel</button>
+                        <div className="product-actions">
+                            <button type="submit">Save Changes</button>
+                            <button type="button" onClick={cancelEditing}>Cancel</button>
+                        </div>
                     </form>
                 )}
             </div>
