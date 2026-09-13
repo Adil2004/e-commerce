@@ -9,7 +9,7 @@ from .serializers import CartItemSerializer, ProductSerializer, UserSerializer
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from .models import Product, CartItems
 import requests
-from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from rest_framework import generics
 from .serializers import UserSerializer
 from rest_framework.decorators import APIView, api_view, permission_classes
@@ -19,10 +19,10 @@ from rest_framework.filters import SearchFilter
 import time
 
 # Create your views here.
-class ProductListView(generics.ListCreateAPIView):
+class ProductListView(generics.ListAPIView):
     queryset = Product.objects.all().order_by("-created_at")
     serializer_class = ProductSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
     pagination_class = ProductPagination
     filter_backends = [SearchFilter]
     search_fields = ['name', 'description']
@@ -30,7 +30,7 @@ class ProductListView(generics.ListCreateAPIView):
 class ProductCreateView(generics.CreateAPIView):
     serializer_class = ProductSerializer
     permission_classes = [IsAuthenticated]
-    parser_classes = [MultiPartParser, FormParser]
+    parser_classes = [MultiPartParser, FormParser, JSONParser]
 
     def perform_create(self, serializer):
         serializer.save(author = self.request.user)
@@ -38,7 +38,7 @@ class ProductCreateView(generics.CreateAPIView):
 class DashboardView(generics.ListAPIView):
     queryset = Product.objects.all().order_by("-created_at")
     serializer_class = ProductSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
     pagination_class = ProductPagination
     filter_backends = [SearchFilter]
     search_fields = ['name', 'description']
@@ -54,7 +54,7 @@ class ProductDeleteView(generics.DestroyAPIView):
 class ProductDetailView(generics.RetrieveAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
     parser_classes = [MultiPartParser, FormParser]
 
 class ProductEditView(generics.UpdateAPIView):

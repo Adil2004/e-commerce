@@ -15,11 +15,9 @@ function ProductDetail() {
     const [editPrice, setEditPrice] = useState("");
     const [editImage, setEditImage] = useState(null);
 
-    
 
-    
     useEffect(() => {
-        setUsername(localStorage.getItem("username"));
+        setUsername(localStorage.getItem("username") || "");
         api.get(`/api/products/${id}/`)
         .then((res) => {
             setProduct(res.data);
@@ -97,17 +95,34 @@ function ProductDetail() {
 
     return (
         <div>
-            <div className="navbar">
+            <ul className="navbar">
                 <li><a href="/">Home</a></li>
                 <li><a href="/dashboard/">All Products</a></li>
-                <li><a href="/products/my">My Products</a></li>
-                <li><a href="/create-product">Create Product</a></li>
                 <li><a href="/ai-assistant">AI Assistant</a></li>
-                <li><a href="/shopping-cart">Shopping Cart</a></li>
-                <li className ="navbar-logout-li">
-                    <a href = "/logout/">Logout</a>
-                </li>
-            </div>
+                {username === "" ? (
+                    <>
+                        <div className="navbar-right-panel">
+                            <li>
+                                <a href="/register">Register</a>
+                            </li>
+                            <li>
+                                <a href="/login">Login</a>
+                            </li>
+                        </div>
+                    </>
+                ) : (
+                    <>
+                        <li><a href="/products/my">My Products</a></li>
+                        <li><a href="/create-product/">Create Product</a></li>
+                        <div className = "navbar-right-panel">
+                            <li><a href="/shopping-cart">Shopping Cart</a></li>
+                            <li>
+                                <a href="/logout/">Logout</a>
+                            </li>
+                        </div>
+                    </>
+                )}
+            </ul>
 
             <h1>Product Detail</h1>
             <div>
@@ -115,24 +130,33 @@ function ProductDetail() {
                     <div>
                         <h1>Product Name: {product.name}</h1>
                         {product.images && (
-                            <img src={product.images} alt={product.name} style={{ maxWidth: "300px" }} />
+                            <>
+                            <h2>Image:</h2>
+                            <img className="product-detail-image" src={product.images} alt={product.name} style={{ maxWidth: "300px" }} />
+                            </>
                         )}
                         <h2>Description: {product.description}</h2>
                         <h2>Posted on: {new Date(product.created_at).toLocaleDateString()}</h2>
                         <h2>Price: ${product.price}</h2>
                         <h2>Created by: {product.author}</h2>
 
-                        {isAuthor && (
+                        {isAuthor ? (
                             <div className="product-actions">
                                 <button onClick={startEditing}>Edit</button>
                                 <button onClick={deleteProduct}>Delete</button>
                             </div>
+                        ) : username !== "" ? (
+                            <div className="product-cart-action">
+                                <button onClick={() => addToCart(product.id)}>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        ) : (
+                            <>
+                                <br />
+                                <h3>You need to login into the account to add product into the cart.</h3>
+                            </>
                         )}
-                        <div className="product-cart-action">
-                            <button onClick={() => addToCart(product.id)}>
-                                Add to Cart
-                            </button>
-                        </div>
                     </div>
                 )}
 

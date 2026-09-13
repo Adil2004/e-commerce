@@ -11,7 +11,7 @@ import ShoppingCart from "./pages/ShoppingCart";
 
 function Logout() {
   localStorage.clear();
-  return <Navigate to="/login" />
+  return <Navigate to="/" />
 }
 
 function RegisterAndLogout() {

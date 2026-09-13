@@ -5,22 +5,39 @@ function Home() {
     const [username, setUsername] = useState("");
 
     useEffect(() => {
-        setUsername(localStorage.getItem("username"));
+        setUsername(localStorage.getItem("username") || "");
     }, [])
 
     return (
         <div>
-            <ul className ="navbar">
+            <ul className="navbar">
                 <li><a href="/">Home</a></li>
                 <li><a href="/dashboard/">All Products</a></li>
-                <li><a href="/products/my">My Products</a></li>
-                <li><a href="/create-product/">Create Product</a></li>
                 <li><a href="/ai-assistant">AI Assistant</a></li>
-                <li><a href="/shopping-cart">Shopping Cart</a></li>
-                <li className = "navbar-logout-li">
-                    <a href="/logout/">Logout</a>
-                </li>
-            </ul>   
+                {username === "" ? (
+                    <>
+                        <div className="navbar-right-panel">
+                            <li>
+                                <a href="/register">Register</a>
+                            </li>
+                            <li>
+                                <a href="/login">Login</a>
+                            </li>
+                        </div>
+                    </>
+                ) : (
+                    <>
+                        <li><a href="/products/my">My Products</a></li>
+                        <li><a href="/create-product/">Create Product</a></li>
+                        <div className = "navbar-right-panel">
+                            <li><a href="/shopping-cart">Shopping Cart</a></li>
+                            <li>
+                                <a href="/logout/">Logout</a>
+                            </li>
+                        </div>
+                    </>
+                )}
+            </ul>
 
             <h1>Home page</h1>
             <h2>Welcome!</h2>

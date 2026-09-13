@@ -16,7 +16,7 @@ function Dashboard() {
     const totalPages = Math.ceil(count / PAGE_SIZE);
 
     useEffect(() => {
-        setUsername(localStorage.getItem("username"));
+        setUsername(localStorage.getItem("username") || "");
     }, []);
 
     useEffect(() => {
@@ -59,13 +59,30 @@ function Dashboard() {
             <ul className="navbar">
                 <li><a href="/">Home</a></li>
                 <li><a href="/dashboard/">All Products</a></li>
-                <li><a href="/products/my">My Products</a></li>
-                <li><a href="/create-product/">Create Product</a></li>
                 <li><a href="/ai-assistant">AI Assistant</a></li>
-                <li><a href="/shopping-cart">Shopping Cart</a></li>
-                <li className="navbar-logout-li">
-                    <a href="/logout/">Logout</a>
-                </li>
+                {username === "" ? (
+                    <>
+                        <div className="navbar-right-panel">
+                            <li>
+                                <a href="/register">Register</a>
+                            </li>
+                            <li>
+                                <a href="/login">Login</a>
+                            </li>
+                        </div>
+                    </>
+                ) : (
+                    <>
+                        <li><a href="/products/my">My Products</a></li>
+                        <li><a href="/create-product/">Create Product</a></li>
+                        <div className = "navbar-right-panel">
+                            <li><a href="/shopping-cart">Shopping Cart</a></li>
+                            <li>
+                                <a href="/logout/">Logout</a>
+                            </li>
+                        </div>
+                    </>
+                )}
             </ul>
 
             <h1>All Products</h1>

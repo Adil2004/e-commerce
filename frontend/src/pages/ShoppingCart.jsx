@@ -16,8 +16,6 @@ function ShoppingCart() {
             try {
                 const response = await api.get('/api/shopping-cart/');
 
-                console.log(response.data);
-
                 setCartItems(response.data);
 
             } catch (error) {
@@ -90,17 +88,19 @@ function ShoppingCart() {
 
     return (
         <div>
-            <ul className="navbar">
+            <ul className ="navbar">
                 <li><a href="/">Home</a></li>
-                <li><a href="/dashboard">All Products</a></li>
-                <li><a href="/products/my">My Products</a></li>
-                <li><a href="/create-product">Create Product</a></li>
+                <li><a href="/dashboard/">All Products</a></li>
                 <li><a href="/ai-assistant">AI Assistant</a></li>
-                <li><a href="/shopping-cart">Shopping Cart</a></li>
-                <li className="navbar-logout-li">
-                    <a href="/logout/">Logout</a>
-                </li>
-            </ul>
+                <li><a href="/products/my">My Products</a></li>
+                <li><a href="/create-product/">Create Product</a></li>
+                <div className = "navbar-right-panel">
+                    <li><a href="/shopping-cart">Shopping Cart</a></li>
+                    <li>
+                        <a href="/logout/">Logout</a>
+                    </li>
+                </div>
+            </ul> 
 
             <h1>Shopping Cart</h1>
 

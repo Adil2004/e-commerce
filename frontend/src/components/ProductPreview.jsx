@@ -6,7 +6,7 @@ function ProductPreview({product, onDetail}) {
     return (
         <div className="product-container" onClick={() => onDetail(product.id)}>
             {product.images && (
-                            <img src={product.images} alt={product.name} style = {{ maxWidth: "75px"}}/>
+                <img src={product.images} alt={product.name} style={{ maxWidth: "75px" }} />
             )}
             <p className="product-name">{product.name}</p>
             <p className="product-price">Price: ${Number(product.price).toFixed(2)}</p>
