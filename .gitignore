@@ -1,3 +1,11 @@
 */*.env
 */media
 */*.sqlite3
+
+__pycache__/
+*.py[cod]
+*.sqlite3
+*.db
+.env
+.env.*
+!.env.example
