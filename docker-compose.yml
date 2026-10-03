@@ -1,11 +1,12 @@
 services:
-
   backend:
     build: ./ecom
     ports:
       - "8000:8000"
     volumes:
       - ./ecom:/app
+    environment:
+      SECRET_KEY: ${SECRET_KEY}
 
   frontend:
     build: ./frontend
