@@ -4,33 +4,77 @@ body {
 }
 
 div {
-  font-family: 'Times New Roman', Times, serif;
+  font-family: "Times New Roman", Times, serif;
 }
 
 .navbar {
-  display: flex;
-  background-color: #f2f2f2; 
-  overflow: hidden;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 30px;
+    margin: 0;
+    list-style: none;
+    border-radius: 10px;
 }
 
-.navbar li a {
-  padding: 10px 14px;
-  display: block;
-  color: black;
-  text-decoration: none;
-  text-align:center;
+/* Navbar sections */
+.navbar-left-panel,
+.navbar-center,
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
-.navbar li a:hover {
-  background-color: white;
+.navbar li {
+    list-style: none;
 }
 
-.navbar-right-panel {
-  margin-left:auto;
-  display: flex;
+/* Navigation buttons */
+.nav-button {
+    display: inline-block;
+    padding: 10px 18px;
+    background-color: #334155;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+}
+
+/* Hover effect */
+.nav-button:hover {
+    background-color: #475569;
+    transform: translateY(-2px);
+}
+
+/* Login button */
+.login-button {
+    background-color: #2563eb;
+}
+
+.login-button:hover {
+    background-color: #1d4ed8;
+}
+
+/* Logout button */
+.logout-button {
+    background-color: #dc2626;
+}
+
+.logout-button:hover {
+    background-color: #b91c1c;
+}
+
+/* Home button */
+.home-button {
+    background-color: #0f766e;
+}
+
+.home-button:hover {
+    background-color: #115e59;
 }
 
 form {
@@ -47,7 +91,6 @@ form h2 {
   font-size: 24px;
   margin-bottom: 20px;
 }
-
 
 form label {
   font-weight: bold;
@@ -79,84 +122,82 @@ form input[type="submit"]:hover {
 }
 
 .dashboard-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    column-gap: 54px;
-    row-gap: 40px;
-    margin: 40px 24px;
-}
-
-.product-preview {
-    width: 187px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 54px;
+  row-gap: 40px;
+  margin: 40px 24px;
 }
 
 .product-preview img {
-    width: 187px;
-    height: 110px;
-    object-fit: cover;
-    border-radius: 3px;
+  width: 187px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 3px;
 }
 
 .product-preview p {
-    margin: 6px 0 0;
-    font-size: 12px;
+  margin: 6px 0 0;
+  font-size: 12px;
 }
 
-h1, h2, h3 {
-    text-align: center;
-    margin-top: 20px;
+h1,
+h2,
+h3 {
+  text-align: center;
+  margin-top: 20px;
 }
 
 .product-cart-action {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
 }
 
 .product-actions {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 }
 
 .pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin: 30px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 30px 0;
 }
 
 .search-form {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    max-width: 500px;
-    margin: 20px auto;
-    padding: 0;
-    background: none;
-    box-shadow: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 0;
+  background: none;
+  box-shadow: none;
 }
 
 .search-form input {
-    flex: 1;
-    padding: 10px;
-    margin: 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+  flex: 1;
+  padding: 10px;
+  margin: 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 .search-form button {
-    padding: 10px 18px;
-    border: none;
-    border-radius: 4px;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
 }
 
 .search-form button:hover {
-    background-color: #0056b3;
+  background-color: #0056b3;
 }
 
 .cart-quantity-controls {
@@ -167,14 +208,14 @@ h1, h2, h3 {
 
 .cart-total-price {
   /* Tells the element to span from the first column line to the last column line */
-  grid-column: 1 / -1; 
-  
+  grid-column: 1 / -1;
+
   /* Adds a gap between the grid items above and your total price */
-  margin-top: 20px; 
+  margin-top: 20px;
 }
 
 .product-detail-image {
-    display: block;
-    max-width: 300px;
-    margin: 20px auto;
+  display: block;
+  max-width: 300px;
+  margin: 20px auto;
 }

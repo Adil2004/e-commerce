@@ -54,19 +54,55 @@ function MyProducts() {
 
     return (
         <div>
-            <ul className ="navbar">
-                <li><a href="/">Home</a></li>
-                <li><a href="/dashboard/">All Products</a></li>
-                <li><a href="/ai-assistant">AI Assistant</a></li>
-                <li><a href="/products/my">My Products</a></li>
-                <li><a href="/create-product/">Create Product</a></li>
-                <div className = "navbar-right-panel">
-                    <li><a href="/shopping-cart">Shopping Cart</a></li>
+            <ul className="navbar">
+                <div className="navbar-left-panel">
                     <li>
-                        <a href="/logout/">Logout</a>
+                        <a href="/" className="nav-button home-button">Home</a>
                     </li>
                 </div>
-            </ul>   
+
+                <div className="navbar-center">
+                    <li>
+                        <a href="/dashboard/" className="nav-button">All Products</a>
+                    </li>
+                    <li>
+                        <a href="/ai-assistant" className="nav-button">AI Assistant</a>
+                    </li>
+
+                    {username !== "" && (
+                        <>
+                            <li>
+                                <a href="/products/my" className="nav-button">My Products</a>
+                            </li>
+                            <li>
+                                <a href="/create-product/" className="nav-button">Create Product</a>
+                            </li>
+                        </>
+                    )}
+                </div>
+
+                <div className="navbar-right">
+                    {username === "" ? (
+                        <>
+                            <li>
+                                <a href="/register" className="nav-button">Register</a>
+                            </li>
+                            <li>
+                                <a href="/login" className="nav-button login-button">Login</a>
+                            </li>
+                        </>
+                    ) : (
+                        <>
+                            <li>
+                                <a href="/shopping-cart" className="nav-button">Shopping Cart</a>
+                            </li>
+                            <li>
+                                <a href="/logout/" className="nav-button logout-button">Logout</a>
+                            </li>
+                        </>
+                    )}
+                </div>
+            </ul>
 
             <h1>My Products</h1>
 
