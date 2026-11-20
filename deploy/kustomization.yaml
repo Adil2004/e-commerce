@@ -1,0 +1,5 @@
+resources:
+  - postgres.yaml
+  - django.yaml
+  - frontend.yaml
+  - ingress.yaml

@@ -106,9 +106,6 @@ function ProductDetail() {
                     <li>
                         <a href="/dashboard/" className="nav-button">All Products</a>
                     </li>
-                    <li>
-                        <a href="/ai-assistant" className="nav-button">AI Assistant</a>
-                    </li>
 
                     {username !== "" && (
                         <>

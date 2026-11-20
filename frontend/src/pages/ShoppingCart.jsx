@@ -94,14 +94,15 @@ function ShoppingCart() {
                 </div>
                 <div className="navbar-center">
                     <li><a href="/dashboard/" className="nav-button">All Products</a></li>
-                    <li><a href="/ai-assistant" className="nav-button">AI Assistant</a></li>
                     <li><a href="/products/my" className="nav-button">My Products</a></li>
                     <li><a href="/create-product/" className="nav-button">Create Product</a></li>
                 </div>
 
                 <div className="navbar-right">
                     <li><a href="/shopping-cart" className="nav-button">Shopping Cart</a></li>
-                    <li><a href="/logout/" className="nav-button">Logout</a></li>
+                    <li>
+                        <a href="/logout/" className="nav-button logout-button">Logout</a>
+                    </li>
                 </div>
             </ul> 
             

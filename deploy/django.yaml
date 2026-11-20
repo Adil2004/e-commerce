@@ -1,0 +1,84 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: django
+  labels:
+    app: django
+spec:
+  ports:
+   - port: 8000
+  selector:
+    app: django
+    tier: backend
+  type: ClusterIP
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: django-app-pvc
+  labels:
+    app: django
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django
+  labels:
+    app: django
+spec:
+  selector:
+    matchLabels:
+      app: django
+      tier: backend
+  strategy:
+    type: Recreate
+  template:
+   metadata: 
+    labels:
+     app: django
+     tier: backend
+   spec:
+    volumes:
+     - name: django-app-data
+       persistentVolumeClaim:
+         claimName: django-app-pvc
+    containers:
+     - image: django-app:v3
+       name: app
+       imagePullPolicy: IfNotPresent
+       ports:
+         - containerPort: 8000
+       volumeMounts:
+         - name: django-app-data
+           mountPath: /app/media
+       env:
+        - name: DB_ENGINE
+          value: postgresql
+        - name: DB_HOST
+          value: django-postgres
+        - name: DB_NAME
+          value: djangodb
+        - name: DB_USER
+          value: djangouser
+        - name: ALLOWED_HOSTS
+          value: "*"
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-password
+              key: password
+        - name: SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: django
+              key: secret
